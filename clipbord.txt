@@ -1,0 +1,3 @@
+# Eclaircir le résultat d'un dictionnaire
+        for cle, valeur in self.deck.items() :
+            print("l'élément de clé : ", cle, "\avaut", valeur)

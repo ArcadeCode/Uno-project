@@ -1,0 +1,3 @@
+# Const :
+canSetAI = False
+interface = None

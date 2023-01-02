@@ -10,6 +10,12 @@ necessary modules :
 from motors.game import Game, Player
 from motors.decks import motherClassDeck
 
+## Consts
+class Const :
+    def __init__(self) -> None:
+        self.version = "V.0.1"
+const = Const()
+
 ## Creates Player
 playerA = Player(0)
 playerB = Player(1)

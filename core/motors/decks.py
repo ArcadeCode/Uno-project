@@ -1,12 +1,12 @@
 from random import randint
 
 class motherClassDeck() :
-    '''This class is the base of all self.deck of the game'''
+    '''Deck "mère" contient toutes les cartes du jeu avant le commencement de la partie'''
     
     def __init__(self) -> None :
         self.deck = {}
 
-        ## Def init :
+        ## Code used for make all 108 cards
         def append_toDict(dict_obj, key, value):
         # Made by thispointer.com : https://thispointer.com/python-how-to-add-append-key-value-pairs-in-dictionary-using-dict-update/
         # Check if key exist in dict or not
@@ -25,16 +25,16 @@ class motherClassDeck() :
 
         ## Creating 108 cards of the Uno game in self.deck
         # All cards have index in key
-        # deck[i] = the proprieties of this : card, color, isPair or isImpair*,isSpecial
+        # deck[i] = the proprieties of this : card, color, isPair or isImpair*, isSpecial
         # * = In the Uno all cards is in couple of 2 or 4 cards so you see A/B or A/B/C/D in the code for storage the differencie
         def init_deck() :
-            ### Note : le
             i = 0
             for color in ["red", "blue", "yellow", "green"] :
                 for nb in range(0, 10) : # Tout les chiffres de cette couleur
                     self.deck[i] = nb, color, "A", "number"
                     i += 1
-                    # He exist only 4 cards 0 in the classic Uno deck so we stop the making of 0 B cards for all colours
+                    # Il n'existe pas de pair de 0 par couleur, ainsi il n'y en a que 4 dans un jeu complet
+                    # Nous vérifion avant de créer le second de la pair si la carte est un 0 :
                     if nb != 0 :
                         self.deck[i] = nb, color, "B", "number"
                         i += 1
@@ -49,27 +49,19 @@ class motherClassDeck() :
                 self.deck[i+2] = specialPer4, color, "C", "specialPer4"
                 self.deck[i+3] = specialPer4, color, "D", "specialPer4"
                 i += 4
-        ## Add to 108 cards a count of point
+        
+        ## # Attribution des points pour chaque carte
         def init_deck_scorePoint() :
-            '''Add point to all type of cards'''
             for key, value in self.deck.items() :
-                if value[3] == "number" : # For all number add the number in points
+                if value[3] == "number" : # Nombre sur la carte = pts
                     append_toDict(self.deck, key, value[0])
                 elif value[3] == "specialPer2" : # +2, reverse, skip = +20 pts
                     append_toDict(self.deck, key, 20)
                 elif value[3] == "specialPer4" : # +4, joker = +50 pts
                     append_toDict(self.deck, key, 50)
 
-        init_deck() # Making the deck
-        init_deck_scorePoint() # Attribut points
-        '''for cle, valeur in self.deck.items() :
-            print(f"l'élément de clé : {cle} \avaut {valeur}", end="\n")'''
-
-    def init_ofPlayer(self, nbCards=7) :
-        playerDeck = {}
-        for x in range(0, nbCards) :
-            pass
-        pass
+        init_deck() # Créer 108 cartes
+        init_deck_scorePoint() # Attribution des points pour chaque carte
 
     def get_deck(self) :
         return self.deck

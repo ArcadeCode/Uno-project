@@ -1,11 +1,5 @@
 # French readme file
 
-- [ ] Game
-- [ ] C
-  - [ ] Sous-élément 2.1, coché
-  - [ ] Sous-élément 2.2, non-coché
-- [ ] Élément 3, non-coché
-
 Bonjour et voici le fichier de présentation du projet Uno en python. Ici vous retrouverez l'explication de comment faire fonctionner le projet et comment marche les moteurs.
 
 Pour démarrer le projet il faut pour l'instant executer le fichier : **core\main.py**

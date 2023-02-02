@@ -43,7 +43,7 @@ if const.lanParty == True :
       def broadcast() :
          pass
 
-      def waitOK() :
+      def waitOK(self) :
          print("Êtes-vous prêt ?")
          input("press enter to continue")
          self.post()

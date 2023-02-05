@@ -26,24 +26,23 @@ from random import randint
 
 class Player() :
     def __init__(self, id, name=None) -> None:
-        if name == None :
+        # Vérification si le nom du joueur a été choisis
+        if name == None or name == "" :
+             # Si nom lui donner un nom aléatoire
             self.name = self.get_randomName()
         else :
             self.name = name
 
-        self.id = id ### <-- Doit finir par se créer tout seul
-
+        self.id = id
         self.score = 0
         self.victory_all = 0
         self.victory_inOneParty = 0
-
-        print(self.name)
 
     def get_name(self) :
         return self.name
     def get_id(self) :
         return self.id
-    def get_id(self) :
+    def get_score(self) :
         return self.score
 
     def get_randomName(self) :

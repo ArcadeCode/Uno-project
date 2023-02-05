@@ -65,7 +65,11 @@ class motherClassDeck() :
 
     def get_deck(self) :
         return self.deck
-    
-    def clear(self) :
-        return self.deck.clear
+
+    def give_cards(self, nb=1) :
+        '''Supprime une/plusieurs cartes du deck et les renvoit'''
+        random = []
+        for _ in range(nb) :
+            random.append(self.deck[randint(0, len(self.deck)-1)])
+        return random
 

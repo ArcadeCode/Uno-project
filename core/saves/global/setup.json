@@ -1,0 +1,12 @@
+{
+    "const_win_WhenPlayerGet": 500,
+    "const_win_MaxTurns": 1000,
+    "const_max_CharPlayerName": 10,
+    "const_max_Players": 4,
+    "const_deck_nbCardsAtStart": 7,
+    "const_deck_allCards": 108,
+    "const_interface_exist": false,
+    "const_interface_path": null,
+    "const_ia_exist": false,
+    "const_const_ia_path": null
+}

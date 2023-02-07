@@ -9,45 +9,39 @@ necessary modules :
 from motors.game import Game, Player
 from motors.decks import motherClassDeck
 
-## Create consts :
-class Const : # On les stock dans un objet
-    def __init__(self) -> None:
-        self.version = "V.0.1"
-        self.acceptAI = False
-        self.lanParty = True
-const = Const()
+## Consts :
+const_win_WhenPlayerGet = None
+const_win_MaxTurns = None
+const_max_CharPlayerName = None 
+const_max_Players = None
+const_deck_nbCardsAtStart = None
+const_deck_allCards = None
+const_interface_exist = None
+const_interface_path = None
+const_ai_exist = None
+const_const_ai_path = None
+# Donne au variables leurs paramètres
+with open("core\saves\global\setup.txt", "r") as file :
+   for i in range(19) :
+      exec(file.readline()) # Lecture du code python contenu dans setup.txt
 
 ## Creates Player
-playerA = Player(0)
-playerB = Player(1)
-playerC = Player(2)
-playerD = Player(3)
-playerE = Player(4)
-playerF = Player(5)
-playerG = Player(6)
-playerH = Player(7)
-# 8 players because it's the max accept by Uno rules
-
-test = motherClassDeck()
+'''players = []
+for x in range(const_max_Players) :
+   players.append(Player(x, input("Choissisez un nom ou appuyer sur entrée\n>")))
+   print(players[-1].get_name(), "a été créer !")'''
+players = []
+for x in range(const_max_Players) :
+   players.append(Player(x, str(x)))
+   print(players[-1].get_name(), "a été créer !")
 
 
-## Init salon
-if const.lanParty == True :
-   class network() :
-      def __init__(self) -> None:
-         pass
-      def post() :
-         pass
-      def get() :
-         pass
-      def broadcast() :
-         pass
-
-      def waitOK(self) :
-         print("Êtes-vous prêt ?")
-         input("press enter to continue")
-         self.post()
-
+## Creates Cards
+#allCards = motherClassDeck(const_deck_nbCardsAtStart,const_deck_allCards)
+pioche = motherClassDeck(const_deck_nbCardsAtStart,const_deck_allCards)
+#playerPioche = pioche.give_cards(4)
+for p in players :
+   p.setDeck(pioche.give_cards(7))
 
 ## Init a game
 # Créer les 108 cartes
@@ -55,7 +49,7 @@ if const.lanParty == True :
 # Placer les cartes restante dans la pioche
 # Prendre une carte de la pioche est la posé sur la table
 
-## Play game
+'''## Play game
 win  = False
 turn = 0
 totalTurn = 0 # Cette varible sera stocké dans motors\turn plus tard
@@ -75,4 +69,4 @@ while win == False or turn > 1000 :
       else : # <--- Partie LAN
          print("La partie a durée trop longtemps, la partie est terminé")
          # Si la partie dure trop longtemps (1K de tours) on la supprime
-         break
+         break'''

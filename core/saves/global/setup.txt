@@ -1,0 +1,19 @@
+#----------------------------------------------------------#
+#Ici est écrit toutes les constantes du jeu, . . . . . . . #
+#Veuillez considérer que aucune sécurité y est appliqué. . #
+#Par conséquent le moindre changement dans ces lignes peut #
+#amener à une erreur fatal . . . . . . . . . . . . . . . . #
+#----------------------------------------------------------#
+#*--- Games options ---*#
+const_win_WhenPlayerGet = 500
+const_win_MaxTurns = 1000
+const_max_CharPlayerName = 10
+const_max_Players = 4
+const_deck_nbCardsAtStart = 7
+const_deck_allCards = 108
+#*----- Interface -----*#
+const_interface_exist = False
+const_interface_path = None
+#*--------- AI --------*#
+const_ai_exist = False
+const_const_ai_path = None

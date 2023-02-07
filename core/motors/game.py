@@ -26,27 +26,25 @@ from random import randint
 
 class Player() :
     def __init__(self, id, name=None) -> None:
-        # Vérification si le nom du joueur a été choisis
-        if name == None or name == "" :
-             # Si nom lui donner un nom aléatoire
+        if name == None :
             self.name = self.get_randomName()
         else :
             self.name = name
 
-        self.deck = None
-        self.id = id
+        self.id = id ### <-- Doit finir par se créer tout seul
+
         self.score = 0
         self.victory_all = 0
         self.victory_inOneParty = 0
+
+        print(self.name)
 
     def get_name(self) :
         return self.name
     def get_id(self) :
         return self.id
-    def get_score(self) :
+    def get_id(self) :
         return self.score
-    def get_deck(self) :
-        return self.deck
 
     def get_randomName(self) :
         randomNameH = ["Adrien", "Benjamin", "Clovid", "David", "Esteban", "François", "Grégoire", "Jaque", "Richard"]
@@ -55,6 +53,3 @@ class Player() :
         random = randomNames[randint(0, len(randomNames)-1)]
         randomNames[randomNames.index(random)] += "A"
         return random
-
-    def setDeck(self, newDeck) :
-        self.deck = newDeck

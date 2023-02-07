@@ -3,8 +3,10 @@ from random import randint
 class motherClassDeck() :
     '''Deck "mère" contient toutes les cartes du jeu avant le commencement de la partie'''
     
-    def __init__(self) -> None :
+    def __init__(self, const_deck_nbCardsAtStart=7,const_deck_allCards=108) -> None :
         self.deck = {}
+        self.deck_nbCardsAtStart = const_deck_nbCardsAtStart
+        self.totalNbCards = const_deck_allCards
 
         ## Code used for make all 108 cards
         def append_toDict(dict_obj, key, value):
@@ -68,8 +70,11 @@ class motherClassDeck() :
 
     def give_cards(self, nb=1) :
         '''Supprime une/plusieurs cartes du deck et les renvoit'''
-        random = []
+        result = {}
         for _ in range(nb) :
-            random.append(self.deck[randint(0, len(self.deck)-1)])
-        return random
+            randomNb = randint(0,self.totalNbCards) # On choissis une carte
+            result[randomNb] = self.deck[randomNb].copy() # On la copie sur le nouveau deck
+            del self.deck[randomNb] # On la supprime de l'ancien deck
+            print(result[randomNb])
+        return result
 

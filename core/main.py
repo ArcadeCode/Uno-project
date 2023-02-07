@@ -10,33 +10,38 @@ from motors.game import Game, Player
 from motors.decks import motherClassDeck
 
 ## Consts :
-const_win_WhenPlayerGet = 500
-const_win_MaxTurns = 1000
-const_max_CharPlayerName = 10
-const_max_Players = 4
-const_deck_nbCardsAtStart = 7
-const_deck_allCards = 108
-const_interface_exist = False
+const_win_WhenPlayerGet = None
+const_win_MaxTurns = None
+const_max_CharPlayerName = None 
+const_max_Players = None
+const_deck_nbCardsAtStart = None
+const_deck_allCards = None
+const_interface_exist = None
 const_interface_path = None
-const_ai_exist = False
+const_ai_exist = None
 const_const_ai_path = None
+# Donne au variables leurs paramètres
 with open("core\saves\global\setup.txt", "r") as file :
    for i in range(19) :
       exec(file.readline()) # Lecture du code python contenu dans setup.txt
 
 ## Creates Player
-players = []
+'''players = []
 for x in range(const_max_Players) :
    players.append(Player(x, input("Choissisez un nom ou appuyer sur entrée\n>")))
+   print(players[-1].get_name(), "a été créer !")'''
+players = []
+for x in range(const_max_Players) :
+   players.append(Player(x, str(x)))
    print(players[-1].get_name(), "a été créer !")
 
-## Creates
-#
-# Cards
-allCards = motherClassDeck()
-pioche = motherClassDeck()
-playerPioche = pioche.give_cards(4)
-print(playerPioche)
+
+## Creates Cards
+#allCards = motherClassDeck(const_deck_nbCardsAtStart,const_deck_allCards)
+pioche = motherClassDeck(const_deck_nbCardsAtStart,const_deck_allCards)
+#playerPioche = pioche.give_cards(4)
+for p in players :
+   p.setDeck(pioche.give_cards(7))
 
 ## Init a game
 # Créer les 108 cartes

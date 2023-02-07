@@ -33,6 +33,7 @@ class Player() :
         else :
             self.name = name
 
+        self.deck = None
         self.id = id
         self.score = 0
         self.victory_all = 0
@@ -44,6 +45,8 @@ class Player() :
         return self.id
     def get_score(self) :
         return self.score
+    def get_deck(self) :
+        return self.deck
 
     def get_randomName(self) :
         randomNameH = ["Adrien", "Benjamin", "Clovid", "David", "Esteban", "François", "Grégoire", "Jaque", "Richard"]
@@ -52,3 +55,6 @@ class Player() :
         random = randomNames[randint(0, len(randomNames)-1)]
         randomNames[randomNames.index(random)] += "A"
         return random
+
+    def setDeck(self, newDeck) :
+        self.deck = newDeck

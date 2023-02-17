@@ -1,22 +1,32 @@
 class Game() :
     def __init__(self) -> None:
-        self.globalScoreBoard = {}
+        pass
 
-    def set_actuallyScoreBoard(self, playersScore) : ### IN BETA
-        '''Return the scoreboard of the party'''
-        actuallyScoreBoard = playersScore
-        actuallyScoreBoard.sort(reversed)
-        return actuallyScoreBoard
-    def set_globalScoreBoard(self, playersVictory_inOneParty) : ### IN BETA
-        '''Check if the global scoreboard can be refresh'''
-        for i in playersVictory_inOneParty : # For every player in the last game
-            i2 = 0 # If player is in the scoreboard 
-            if i > self.globalScoreBoard[i2] :
-                while i > self.globalScoreBoard[i2] :
-                    i2 += 1 # Have more victory than i2
-                self.globalScoreBoard[i2] = i # If i2 superior set at the bottom i
-            return self.globalScoreBoard
-
+    def rules(cardPlaced, cardPlayer) :
+        
+        print(cardPlaced)
+        print(cardPlayer)
+        print(type(cardPlaced))
+        print(type(cardPlayer))
+        '''Vérifie si le joueur peut jouer cette carte'''
+        if cardPlayer[0] == "Joker" :
+            # Carte joker
+            print("Joker")
+            return True
+        elif cardPlayer[0] == "+4" :
+            # Carte +4
+            print("Joker")
+            return True
+        elif cardPlaced[0][1][0] == cardPlayer[0] :
+            # Même symbole
+            return True
+        elif cardPlaced[0][1][1] == cardPlayer[1] :
+            # Même couleur
+            return True
+        else :
+            # La carte ne peut pas être poser
+            return False
+        
 
 
 
@@ -33,7 +43,7 @@ class Player() :
         else :
             self.name = name
 
-        self.deck = None
+        self.deck = {}
         self.id = id
         self.score = 0
         self.victory_all = 0
@@ -48,7 +58,17 @@ class Player() :
     def get_deck(self) :
         return self.deck
 
+    def get_visualDeck(self) :
+        '''Permet un affichage type tableau de toutes les cartes du joueur'''
+        print("index :\a informations :")
+        for cle, valeur in self.deck.items() :
+            if valeur[0][1] != None : # Evite de print la valeur de la couleur de la carte c'est une "None"
+                print(cle, "\a\t=", valeur[0][0], valeur[0][1])
+            else :
+                print(cle, "\a\t=", valeur[0][0])
+
     def get_randomName(self) :
+        '''Ajoute un nom à un joueur qui n'en a pas'''
         randomNameH = ["Adrien", "Benjamin", "Clovid", "David", "Esteban", "François", "Grégoire", "Jaque", "Richard"]
         randomNameF = ["Aline", "Céline", "Elsa", "Fadoua"]
         randomNames = randomNameH + randomNameF
@@ -56,5 +76,9 @@ class Player() :
         randomNames[randomNames.index(random)] += "A"
         return random
 
-    def setDeck(self, newDeck) :
-        self.deck = newDeck
+    def setDeck(self, newDeck, ecrase=False) :
+        '''Ajoute une carte au deck, ou écrase le deck par une carte'''
+        if ecrase == False :
+            self.deck.update(newDeck)
+        elif ecrase == True :
+            self.deck = newDeck

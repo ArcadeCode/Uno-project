@@ -26,47 +26,73 @@ with open("core\saves\global\setup.txt", "r") as file :
       exec(file.readline()) # Lecture du code python contenu dans setup.txt
 
 ## Creates Player
-'''players = []
+players = []
 for x in range(const_max_Players) :
    players.append(Player(x, input("Choissisez un nom ou appuyer sur entrée\n>")))
-   print(players[-1].get_name(), "a été créer !")'''
+   print(players[-1].get_name(), "a été créer !")
+'''
+# Debug version :
 players = []
 for x in range(const_max_Players) :
    players.append(Player(x, str(x)))
-   print(players[-1].get_name(), "a été créer !")
+   print(players[-1].get_name(), "a été créer !")'''
 
 
 ## Creates Cards
 #allCards = motherClassDeck(const_deck_nbCardsAtStart,const_deck_allCards)
-pioche = motherClassDeck(const_deck_nbCardsAtStart,const_deck_allCards)
-#playerPioche = pioche.give_cards(4)
+pioche = motherClassDeck(const_deck_allCards)
+
 for p in players :
-   p.setDeck(pioche.give_cards(7))
+   # Attribution d'un nombre de cartes au début de la partie à chaqu'un
+   for x in range(const_deck_nbCardsAtStart) :
+      p.setDeck(pioche.give_cards())
 
-## Init a game
-# Créer les 108 cartes
-# Donner 7 cartes à chaque joueurs
-# Placer les cartes restante dans la pioche
-# Prendre une carte de la pioche est la posé sur la table
+## Règles :
+def get_uno(player) :
+   '''Reste t-il des cartes au joueur ?'''
+   if player.get_deck() == {} :
+      return True
+   else :
+      return False
 
-'''## Play game
-win  = False
-turn = 0
-totalTurn = 0 # Cette varible sera stocké dans motors\turn plus tard
-while win == False or turn > 1000 :
-   
-   turn += 1
-   totalTurn += 1
+## Lancement
+win = False
+card_placed = []
+card_pioche = []
 
-   # Sécurités anti bouclage
-   if turn > 1000 :
-      if const.lanParty == False : # <-- Partie local
-         print("Plus de", totalTurn,  "tours jouer voulez vous abandonner ?")
-         if input("Write 'Confirm' to end the party\n") == "Confirm" :
-            break
+card_placed.append(pioche.give_cards())
+print(type(card_placed))
+for x in range(107) :
+   card_pioche.append(pioche.give_cards())
+
+print(type(card_placed[0]))
+
+## Boucle :
+i = 0 # Pour éviter en cas de problème de générer une partie trop longue
+while win == False and i < 10 : # Tant que aucun joueur à gagné
+   # Pour chaque joueur
+   for p in players :
+      # Affiche ses cartes
+      print("> Joueur :",p.get_name(), "joue")
+      print("Voici vos cartes :")
+      p.get_visualDeck()
+      
+      # Sélection de la carte par le user
+      command = int(input("Choissisez l'index que vous voulez...\n>"))
+      try : # Vérification de la présence de la carte dans le deck
+         p.deck[command]
+      except :
+         print("Erreur, clé invalide veuillez choisir une clé existante dans votre deck")
+         print("Votre tour est passé")
+         continue
+      else :
+         print("Carte choissis !")
+         # Vérification de la possibilité de placer la carte sur la carte
+         # Précédemment placé, se référer à motors/game.py -> class Game()
+         if Game.rules(card_placed[-1], p.deck[command]) == True :
+            print("Votre carte a été posé")
          else :
-            turn = 0
-      else : # <--- Partie LAN
-         print("La partie a durée trop longtemps, la partie est terminé")
-         # Si la partie dure trop longtemps (1K de tours) on la supprime
-         break'''
+            print("Erreur, carte impossible")
+      
+      win = get_uno(p) # Verif if the player have win
+   i+=1
